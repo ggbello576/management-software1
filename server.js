@@ -1,5 +1,5 @@
 //backend
-
+require("dotenv").config();//carica la libreria dotenv, .config()cerca e legge .env
 const http = require("node:http"); // prende il modulo http da node
 const fs = require("node:fs"); //fs modulo per lavorare con i file
 

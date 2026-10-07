@@ -12,4 +12,4 @@ CREATE TABLE righe_acquisto(
     quantita INTEGER NOT NULL CHECK (quantita>0),
     costo_unitario NUMERIC(10, 2) NOT NULL CHECK (costo_unitario >=0)
 
-);
+);  \

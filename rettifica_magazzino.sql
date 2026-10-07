@@ -4,4 +4,4 @@ CREATE TABLE rettifiche_magazzino (
     quantita_variazione INTEGER NOT NULL CHECK (quantita_variazione <> 0),
     data_movimento TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     motivo TEXT NOT NULL
-);
+); 
