@@ -1,0 +1,11 @@
+{
+  "name": "gestionale-parrucchiera",
+  "version": "1.0.0",
+  "description": "EF Stylist management software",
+  "main": "server.js ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriele Gentile",
+  "license": "UNLICENSED"
+}

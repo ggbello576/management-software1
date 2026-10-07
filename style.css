@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    padding: 32px 16px;
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #202124;
+}
+
+h1 {
+    color: #234;
+    font-size: 32px;
+}
+
+p {
+    font-size: 18px;
+}   
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+.contenitore {
+    width: 100%;
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 32px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.intestazione {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.soprattitolo {
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #667085;
+}
+
+.intestazione h1 {
+    margin-bottom: 0;
+}
+
+.pulsante {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 8px;
+    background-color: #234;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.riepilogo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.scheda-statistica {
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.scheda-statistica h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.scheda-statistica p {
+    margin: 12px 0 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+    .riepilogo {
+    grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .riepilogo {
+    grid-template-columns: 1fr;
+    }
+}
+.movimenti {
+    margin-top: 40px;
+}
+
+.movimenti h2 {
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.tabella-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    color: #667085;
+    font-size: 13px;
+}
+
+.navigazione {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.pulsante-sezione {
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background-color: white;
+    color: #344054;
+    font: inherit;
+    cursor: pointer;
+    text-align: center;
+}
+
+.pulsante-sezione.attivo {
+    background-color: #234;
+    border-color: #234;
+    color: white;
+}
