@@ -52,6 +52,51 @@
         <a href="/fornitori" class="pulsante-sezione">Fornitori</a>
     </nav>
 
+    <section class="dashboard-insight-grid" aria-label="Indicatori operativi">
+        <article class="dashboard-panel dashboard-chart-panel">
+            <div class="dashboard-panel-heading">
+                <div>
+                    <p class="soprattitolo">ATTIVITÀ RECENTE</p>
+                    <h2>Movimenti per giorno</h2>
+                </div>
+                <span class="dashboard-panel-badge">DATI API</span>
+            </div>
+            <p class="dashboard-panel-description">
+                Vendite e acquisti presenti negli ultimi movimenti caricati.
+            </p>
+            <div id="grafico-movimenti" class="grafico-movimenti" role="img" aria-label="Grafico dei movimenti recenti"></div>
+            <p id="grafico-movimenti-vuoto" class="grafico-vuoto" hidden>
+                Il grafico apparirà quando saranno disponibili movimenti.
+            </p>
+        </article>
+
+        <article class="dashboard-panel dashboard-focus-panel">
+            <div class="dashboard-panel-heading">
+                <div>
+                    <p class="soprattitolo">FOCUS OPERATIVO</p>
+                    <h2>Da tenere sotto controllo</h2>
+                </div>
+                <span class="dashboard-panel-status">LIVE</span>
+            </div>
+            <div class="dashboard-focus-item dashboard-focus-warning">
+                <span class="dashboard-focus-icon" aria-hidden="true">!</span>
+                <div>
+                    <strong>Scorte da riordinare</strong>
+                    <span><b id="focus-riordino">—</b> prodotti richiedono attenzione</span>
+                </div>
+                <a href="/magazzino">Apri</a>
+            </div>
+            <div class="dashboard-focus-item dashboard-focus-neutral">
+                <span class="dashboard-focus-icon" aria-hidden="true">↗</span>
+                <div>
+                    <strong>Movimenti caricati</strong>
+                    <span><b id="focus-movimenti">—</b> registrazioni recenti</span>
+                </div>
+                <span class="dashboard-focus-arrow" aria-hidden="true">›</span>
+            </div>
+        </article>
+    </section>
+
     <section class="movimenti">
         <h2>Ultimi movimenti</h2>
 

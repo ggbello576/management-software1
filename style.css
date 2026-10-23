@@ -1,21 +1,29 @@
 :root {
-    --inchiostro: #20312b;
-    --testo-secondario: #63746d;
-    --verde: #26715d;
-    --verde-scuro: #1d594a;
-    --verde-chiaro: #e7f2ed;
-    --menta: #f3f8f5;
-    --sfondo: #f4f7f4;
-    --bianco: #ffffff;
-    --bordo: #dce7e1;
-    --bordo-forte: #c4d5cc;
-    --rosso: #b43d3d;
-    --rosso-chiaro: #fff1ef;
-    --ambra: #9a6717;
-    --ambra-chiaro: #fff8e8;
-    --ombra: 0 18px 48px rgb(31 55 44 / 8%);
-    --raggio-grande: 22px;
-    --raggio-medio: 13px;
+    --sfondo: #080d14;
+    --superficie: #0f1721;
+    --superficie-raised: #151f2b;
+    --superficie-soft: #111b27;
+    --superficie-input: #0a1119;
+    --testo: #f4f8fc;
+    --testo-secondario: #a2b0bf;
+    --testo-terziario: #718092;
+    --bordo: #263544;
+    --bordo-forte: #3a4e61;
+    --lime: #c4f94b;
+    --lime-soft: #24341e;
+    --ciano: #55d6ff;
+    --ciano-soft: #132c39;
+    --azzurro: #76a8ff;
+    --ambra: #ffb84d;
+    --ambra-soft: #382b1c;
+    --rosso: #ff7180;
+    --rosso-soft: #391e27;
+    --verde: #5ee3a6;
+    --ombra: 0 24px 70px rgb(0 0 0 / 34%);
+    --raggio-grande: 18px;
+    --raggio-medio: 10px;
+    --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 *,
@@ -27,17 +35,22 @@
 html {
     min-width: 320px;
     background: var(--sfondo);
+    color-scheme: dark;
 }
 
 body {
     min-width: 320px;
     margin: 0;
-    padding: 24px 16px;
-    background:
-        radial-gradient(circle at top left, rgb(224 240 231 / 55%), transparent 34rem),
-        var(--sfondo);
-    color: var(--inchiostro);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding: 24px 20px;
+    background-color: var(--sfondo);
+    background-image:
+        linear-gradient(90deg, rgb(118 168 255 / 3%) 1px, transparent 1px),
+        linear-gradient(rgb(118 168 255 / 3%) 1px, transparent 1px),
+        radial-gradient(circle at 12% 0%, rgb(85 214 255 / 9%), transparent 30rem),
+        radial-gradient(circle at 88% 5%, rgb(196 249 75 / 5%), transparent 26rem);
+    background-size: 64px 64px, 64px 64px, auto, auto;
+    color: var(--testo);
+    font-family: var(--font);
     font-size: 16px;
     line-height: 1.5;
 }
@@ -55,7 +68,7 @@ a {
 }
 
 a {
-    color: var(--verde);
+    color: var(--ciano);
 }
 
 a:focus-visible,
@@ -63,8 +76,8 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-    outline: 3px solid rgb(38 113 93 / 28%);
-    outline-offset: 2px;
+    outline: 2px solid var(--lime);
+    outline-offset: 3px;
 }
 
 h1,
@@ -77,19 +90,22 @@ p {
 h1,
 h2,
 h3 {
-    color: var(--inchiostro);
+    color: var(--testo);
     line-height: 1.15;
 }
 
 h1 {
     margin-bottom: 10px;
-    font-size: clamp(1.85rem, 3vw, 2.65rem);
-    letter-spacing: -0.04em;
+    font-size: clamp(2rem, 3.5vw, 3.25rem);
+    font-weight: 780;
+    letter-spacing: -0.055em;
 }
 
 h2 {
     margin-bottom: 8px;
-    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    font-size: clamp(1.12rem, 2vw, 1.4rem);
+    font-weight: 720;
+    letter-spacing: -0.025em;
 }
 
 p {
@@ -97,19 +113,20 @@ p {
 }
 
 .barra-sessione {
-    width: min(1240px, 100%);
-    margin: 0 auto 16px;
-    padding: 12px 16px;
+    width: min(1400px, 100%);
+    min-height: 48px;
+    margin: 0 auto 18px;
+    padding: 9px 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
     border: 1px solid var(--bordo);
-    border-radius: 999px;
-    background: rgb(255 255 255 / 92%);
-    box-shadow: 0 8px 24px rgb(31 55 44 / 6%);
+    border-radius: var(--raggio-medio);
+    background: rgb(15 23 33 / 92%);
+    box-shadow: 0 12px 30px rgb(0 0 0 / 18%);
     color: var(--testo-secondario);
-    font-size: 0.9rem;
+    font-size: 0.86rem;
 }
 
 .barra-sessione > span {
@@ -117,6 +134,17 @@ p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.barra-sessione > span::before {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    margin-right: 9px;
+    border-radius: 50%;
+    background: var(--verde);
+    box-shadow: 0 0 0 4px rgb(94 227 166 / 12%);
+    content: "";
 }
 
 .controlli-sessione {
@@ -128,12 +156,12 @@ p {
 }
 
 .controlli-sessione select {
-    min-height: 38px;
-    padding: 7px 32px 7px 10px;
+    min-height: 36px;
+    padding: 6px 30px 6px 10px;
     border: 1px solid var(--bordo-forte);
-    border-radius: 9px;
-    background: var(--bianco);
-    color: var(--inchiostro);
+    border-radius: 7px;
+    background: var(--superficie-input);
+    color: var(--testo);
 }
 
 .contenitore,
@@ -143,17 +171,40 @@ p {
 }
 
 .contenitore {
-    max-width: 1240px;
-    padding: clamp(20px, 4vw, 40px);
-    border: 1px solid rgb(220 231 225 / 75%);
+    position: relative;
+    max-width: 1400px;
+    padding: clamp(28px, 4vw, 48px);
+    border: 1px solid var(--bordo);
     border-radius: var(--raggio-grande);
-    background: var(--bianco);
+    background: rgb(15 23 33 / 97%);
     box-shadow: var(--ombra);
 }
 
+.contenitore::before {
+    position: absolute;
+    top: 0;
+    right: 18%;
+    left: 18%;
+    height: 2px;
+    border-radius: 0 0 4px 4px;
+    background: linear-gradient(90deg, transparent, var(--ciano), var(--lime), transparent);
+    content: "";
+    opacity: 0.9;
+}
+
 .pagina-vendite {
-    max-width: 1120px;
+    max-width: 1240px;
     padding: 0 8px 32px;
+}
+
+.pagina-vendite::before {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--ciano), var(--lime));
+    content: "";
 }
 
 .intestazione,
@@ -165,7 +216,7 @@ p {
 }
 
 .intestazione {
-    margin-bottom: 24px;
+    margin-bottom: 26px;
 }
 
 .intestazione-vendite {
@@ -180,21 +231,22 @@ p {
 .soprattitolo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     margin: 0 0 10px;
-    color: var(--verde);
-    font-size: 0.72rem;
+    color: var(--ciano);
+    font-family: var(--mono);
+    font-size: 0.68rem;
     font-weight: 800;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
 }
 
 .soprattitolo::before {
-    width: 9px;
-    height: 9px;
-    flex: 0 0 9px;
-    border-radius: 50%;
-    background: var(--verde);
-    box-shadow: 0 0 0 5px var(--verde-chiaro);
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 2px;
+    background: var(--lime);
+    box-shadow: 5px 5px 0 rgb(196 249 75 / 22%);
     content: "";
 }
 
@@ -209,6 +261,8 @@ p {
 .link-home {
     flex: 0 0 auto;
     margin-top: 8px;
+    color: var(--ciano);
+    font-size: 0.9rem;
     font-weight: 700;
     text-decoration: none;
 }
@@ -216,104 +270,361 @@ p {
 .link-home:hover,
 .link-cliente:hover,
 .collegamento-gestione a:hover {
+    color: var(--lime);
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
 .navigazione {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
-    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
     margin: 0 0 30px;
-    padding: 8px;
+    padding: 7px;
     border: 1px solid var(--bordo);
-    border-radius: 16px;
-    background: var(--menta);
+    border-radius: var(--raggio-medio);
+    background: #0b121a;
 }
 
 .pulsante-sezione {
-    min-height: 42px;
+    min-height: 40px;
+    flex: 1 1 110px;
     display: grid;
     place-items: center;
     padding: 8px 12px;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: 7px;
     color: var(--testo-secondario);
-    font-size: 0.91rem;
+    font-size: 0.82rem;
     font-weight: 700;
     text-align: center;
     text-decoration: none;
-    transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+    transition: background 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
 }
 
 .pulsante-sezione:hover {
     border-color: var(--bordo-forte);
-    background: var(--bianco);
-    color: var(--verde-scuro);
+    background: var(--superficie-raised);
+    color: var(--testo);
     transform: translateY(-1px);
 }
 
 .pulsante-sezione.attivo {
-    border-color: var(--verde-scuro);
-    background: var(--verde-scuro);
-    color: var(--bianco);
-    box-shadow: 0 5px 12px rgb(29 89 74 / 18%);
+    border-color: var(--lime);
+    background: var(--lime);
+    color: #122007;
+    box-shadow: 0 5px 16px rgb(196 249 75 / 16%);
 }
 
 .riepilogo {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
-    margin: 0 0 30px;
+    margin: 0 0 22px;
 }
 
 .scheda-statistica {
-    min-height: 142px;
-    padding: 20px;
+    position: relative;
+    min-height: 150px;
+    padding: 21px;
+    overflow: hidden;
     border: 1px solid var(--bordo);
+    border-top: 3px solid var(--bordo-forte);
     border-radius: var(--raggio-medio);
-    background: var(--menta);
+    background: var(--superficie-soft);
+}
+
+.scheda-statistica::after {
+    position: absolute;
+    right: -24px;
+    bottom: -30px;
+    width: 90px;
+    height: 90px;
+    border: 1px solid rgb(255 255 255 / 6%);
+    border-radius: 50%;
+    content: "";
 }
 
 .scheda-statistica h2 {
-    margin-bottom: 22px;
-    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 25px;
+    color: var(--testo-secondario);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
 }
 
 .scheda-statistica p {
+    position: relative;
+    z-index: 1;
     margin: 0;
-    color: var(--verde-scuro);
-    font-size: clamp(1.65rem, 3vw, 2.2rem);
+    color: var(--testo);
+    font-family: var(--mono);
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
     font-weight: 800;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.06em;
 }
 
 .scheda-statistica-riordino {
-    border-color: #e9c5bd;
-    background: var(--rosso-chiaro);
+    border-top-color: var(--rosso);
+    background: linear-gradient(145deg, var(--superficie-soft), var(--rosso-soft));
 }
 
-.scheda-statistica-riordino p,
-.scheda-statistica-acquisti p {
+.scheda-statistica-riordino p {
     color: var(--rosso);
 }
 
 .scheda-statistica-vendite {
-    border-color: #b7ddce;
-    background: var(--verde-chiaro);
+    border-top-color: var(--lime);
+    background: linear-gradient(145deg, var(--superficie-soft), var(--lime-soft));
 }
 
 .scheda-statistica-vendite p {
-    color: var(--verde-scuro);
+    color: var(--lime);
 }
 
 .scheda-statistica-acquisti {
-    border-color: #e9c5bd;
-    background: var(--rosso-chiaro);
+    border-top-color: var(--ambra);
+    background: linear-gradient(145deg, var(--superficie-soft), var(--ambra-soft));
+}
+
+.scheda-statistica-acquisti p {
+    color: var(--ambra);
 }
 
 .scheda-statistica-clienti {
-    background: #f4f1fc;
+    border-top-color: var(--ciano);
+    background: linear-gradient(145deg, var(--superficie-soft), var(--ciano-soft));
+}
+
+.scheda-statistica-clienti p {
+    color: var(--ciano);
+}
+
+.dashboard-insight-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.85fr);
+    gap: 16px;
+    margin: 0 0 30px;
+}
+
+.dashboard-panel {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--bordo);
+    border-radius: var(--raggio-medio);
+    background: var(--superficie);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 14%);
+}
+
+.dashboard-panel-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.dashboard-panel-heading .soprattitolo {
+    margin-bottom: 8px;
+}
+
+.dashboard-panel-heading h2 {
+    margin-bottom: 0;
+}
+
+.dashboard-panel-description {
+    margin: 7px 0 19px;
+    color: var(--testo-secondario);
+    font-size: 0.88rem;
+}
+
+.dashboard-panel-badge,
+.dashboard-panel-status {
+    flex: 0 0 auto;
+    padding: 5px 8px;
+    border: 1px solid var(--bordo-forte);
+    border-radius: 5px;
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+}
+
+.dashboard-panel-status {
+    border-color: rgb(94 227 166 / 38%);
+    color: var(--verde);
+}
+
+.grafico-movimenti {
+    min-height: 225px;
+}
+
+.grafico-legenda {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.67rem;
+}
+
+.grafico-legenda-voce {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.grafico-legenda-voce i {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.grafico-legenda-voce .grafico-barra-vendite {
+    background: var(--ciano);
+}
+
+.grafico-legenda-voce .grafico-barra-acquisti {
+    background: var(--ambra);
+}
+
+.grafico-area {
+    height: 188px;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(36px, 1fr));
+    gap: 10px;
+    align-items: end;
+    padding: 12px 2px 0;
+    border-bottom: 1px solid var(--bordo-forte);
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 45px,
+        rgb(162 176 191 / 7%) 46px,
+        transparent 47px
+    );
+}
+
+.grafico-colonna {
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.grafico-barre {
+    height: 150px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 4px;
+}
+
+.grafico-barre > span {
+    width: 13px;
+    min-height: 0;
+    display: block;
+    border-radius: 4px 4px 1px 1px;
+    transition: height 180ms ease;
+}
+
+.grafico-barra-vendite {
+    background: var(--ciano);
+    box-shadow: 0 0 16px rgb(85 214 255 / 22%);
+}
+
+.grafico-barra-acquisti {
+    background: var(--ambra);
+    box-shadow: 0 0 16px rgb(255 184 77 / 18%);
+}
+
+.grafico-etichetta {
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.62rem;
+}
+
+.grafico-vuoto {
+    margin: 38px 0 0;
+    color: var(--testo-terziario);
+    font-size: 0.9rem;
+}
+
+.dashboard-focus-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-focus-item {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid var(--bordo);
+    border-radius: var(--raggio-medio);
+    background: var(--superficie-soft);
+}
+
+.dashboard-focus-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--ambra-soft);
+    color: var(--ambra);
+    font-family: var(--mono);
+    font-weight: 800;
+}
+
+.dashboard-focus-neutral .dashboard-focus-icon {
+    background: var(--ciano-soft);
+    color: var(--ciano);
+}
+
+.dashboard-focus-item strong,
+.dashboard-focus-item span {
+    display: block;
+}
+
+.dashboard-focus-item strong {
+    color: var(--testo);
+    font-size: 0.9rem;
+}
+
+.dashboard-focus-item div > span {
+    margin-top: 3px;
+    color: var(--testo-secondario);
+    font-size: 0.78rem;
+}
+
+.dashboard-focus-item b {
+    color: var(--testo);
+}
+
+.dashboard-focus-item a,
+.dashboard-focus-arrow {
+    color: var(--lime);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.dashboard-focus-arrow {
+    color: var(--testo-terziario);
+    font-size: 1.4rem;
+    font-weight: 400;
 }
 
 .movimenti,
@@ -329,6 +640,8 @@ p {
 .tabella-gestione-scroll,
 .tabella-vendita-scroll {
     overflow-x: auto;
+    border: 1px solid var(--bordo);
+    border-radius: var(--raggio-medio);
     -webkit-overflow-scrolling: touch;
 }
 
@@ -337,22 +650,29 @@ table {
     min-width: 620px;
     border-collapse: separate;
     border-spacing: 0;
+    background: #0d151e;
     text-align: left;
 }
 
 th,
 td {
     padding: 14px 15px;
-    border-bottom: 1px solid #e7eee9;
+    border-bottom: 1px solid #21303e;
     vertical-align: top;
 }
 
 th {
-    color: var(--testo-secondario);
-    font-size: 0.74rem;
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.67rem;
     font-weight: 800;
     letter-spacing: 0.07em;
     text-transform: uppercase;
+    white-space: nowrap;
+}
+
+td {
+    color: #dfe8f0;
 }
 
 tbody tr:last-child td {
@@ -360,21 +680,21 @@ tbody tr:last-child td {
 }
 
 tbody tr:hover td {
-    background: #fbfdfb;
+    background: #162330;
 }
 
 .movimento-vendita td {
-    background: var(--verde-chiaro);
-    color: var(--verde-scuro);
+    background: rgb(36 52 30 / 72%);
+    color: var(--lime);
 }
 
 .movimento-acquisto td {
-    background: var(--rosso-chiaro);
-    color: var(--rosso);
+    background: rgb(56 43 28 / 72%);
+    color: var(--ambra);
 }
 
 .prodotto-da-riordinare td {
-    background: var(--ambra-chiaro);
+    background: rgb(56 43 28 / 52%);
 }
 
 .prodotto-da-riordinare td:last-child {
@@ -384,12 +704,13 @@ tbody tr:hover td {
 
 .scheda-gestione,
 .scheda-vendita {
+    min-width: 0;
     margin-top: 20px;
-    padding: clamp(18px, 3vw, 28px);
+    padding: clamp(20px, 3vw, 30px);
     border: 1px solid var(--bordo);
-    border-radius: 17px;
-    background: var(--bianco);
-    box-shadow: 0 8px 24px rgb(31 55 44 / 5%);
+    border-radius: var(--raggio-medio);
+    background: var(--superficie);
+    box-shadow: 0 10px 26px rgb(0 0 0 / 18%);
 }
 
 .scheda-gestione h2,
@@ -404,6 +725,7 @@ tbody tr:hover td {
 
 .form-gestione,
 .form-vendita {
+    min-width: 0;
     display: grid;
     gap: 18px;
 }
@@ -422,9 +744,9 @@ tbody tr:hover td {
 .pagina-vendite label {
     display: block;
     margin-bottom: 7px;
-    color: var(--inchiostro);
-    font-size: 0.9rem;
-    font-weight: 750;
+    color: var(--testo);
+    font-size: 0.82rem;
+    font-weight: 700;
 }
 
 .campo-gestione input,
@@ -437,10 +759,17 @@ tbody tr:hover td {
     min-height: 46px;
     padding: 10px 13px;
     border: 1px solid var(--bordo-forte);
-    border-radius: 10px;
-    background: var(--bianco);
-    color: var(--inchiostro);
-    transition: border-color 160ms ease, box-shadow 160ms ease;
+    border-radius: 7px;
+    background: var(--superficie-input);
+    color: var(--testo);
+    transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.campo-gestione input::placeholder,
+.campo-gestione textarea::placeholder,
+.pagina-vendite input::placeholder,
+.pagina-vendite textarea::placeholder {
+    color: var(--testo-terziario);
 }
 
 .campo-gestione textarea,
@@ -455,8 +784,9 @@ tbody tr:hover td {
 .pagina-vendite input:focus,
 .pagina-vendite select:focus,
 .pagina-vendite textarea:focus {
-    border-color: var(--verde);
-    box-shadow: 0 0 0 4px rgb(38 113 93 / 11%);
+    border-color: var(--ciano);
+    background: #0e1822;
+    box-shadow: 0 0 0 3px rgb(85 214 255 / 13%);
     outline: 0;
 }
 
@@ -466,10 +796,10 @@ tbody tr:hover td {
     margin: 16px 0 0;
     padding: 0;
     border: 1px solid transparent;
-    border-radius: 10px;
-    color: var(--verde-scuro);
-    font-size: 0.95rem;
-    font-weight: 650;
+    border-radius: 7px;
+    color: var(--verde);
+    font-size: 0.86rem;
+    font-weight: 700;
 }
 
 .messaggio-gestione:not(:empty),
@@ -478,8 +808,8 @@ tbody tr:hover td {
     display: flex;
     align-items: center;
     padding: 11px 14px;
-    border-color: #b9dbc9;
-    background: var(--verde-chiaro);
+    border-color: rgb(94 227 166 / 36%);
+    background: rgb(26 59 48 / 74%);
 }
 
 .righe-conteggio {
@@ -495,15 +825,16 @@ tbody tr:hover td {
     margin: 0;
     padding: 20px;
     border: 1px solid var(--bordo);
-    border-radius: 13px;
-    background: #fbfdfb;
+    border-radius: 8px;
+    background: var(--superficie-input);
 }
 
 .riga-conteggio legend {
     grid-column: 1 / -1;
     padding: 0 7px;
-    color: var(--verde-scuro);
-    font-weight: 800;
+    color: var(--ciano);
+    font-size: 0.83rem;
+    font-weight: 700;
 }
 
 .riga-conteggio .campo-gestione:first-of-type {
@@ -534,20 +865,20 @@ tbody tr:hover td {
 .tabella-vendita th,
 .tabella-vendita td {
     padding: 14px 15px;
-    border-bottom: 1px solid #e7eee9;
+    border-bottom: 1px solid #21303e;
 }
 
 .tabella-vuota {
     min-height: 68px;
     padding: 22px !important;
-    color: var(--testo-secondario);
+    color: var(--testo-terziario);
     text-align: center;
 }
 
 .link-cliente,
 .collegamento-gestione a {
-    color: var(--verde);
-    font-weight: 750;
+    color: var(--ciano);
+    font-weight: 700;
     text-decoration: none;
 }
 
@@ -562,14 +893,15 @@ tbody tr:hover td {
     min-width: 0;
     padding: 17px;
     border: 1px solid var(--bordo);
-    border-radius: 12px;
-    background: var(--menta);
+    border-radius: 8px;
+    background: var(--superficie-input);
 }
 
 .dati-cliente dt {
     margin-bottom: 5px;
-    color: var(--testo-secondario);
-    font-size: 0.78rem;
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.67rem;
     font-weight: 800;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -589,18 +921,20 @@ tbody tr:hover td {
 
 .selettore-acquisto,
 .selettore-vendita {
+    min-width: 0;
     margin: 0;
     padding: 20px;
     border: 1px solid var(--bordo);
-    border-radius: 13px;
-    background: #fbfdfb;
+    border-radius: 8px;
+    background: var(--superficie-input);
 }
 
 .selettore-acquisto legend,
 .selettore-vendita legend {
     padding: 0 8px;
-    color: var(--verde-scuro);
-    font-weight: 800;
+    color: var(--ciano);
+    font-size: 0.82rem;
+    font-weight: 700;
 }
 
 .campi-acquisto {
@@ -625,12 +959,13 @@ tbody tr:hover td {
     justify-content: center;
     padding: 9px 16px;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: 7px;
+    font-size: 0.88rem;
     font-weight: 750;
     line-height: 1.2;
     text-decoration: none;
     cursor: pointer;
-    transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+    transition: background 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
 }
 
 .pulsante:hover,
@@ -641,14 +976,15 @@ tbody tr:hover td {
 }
 
 .pulsante-secondario {
-    border-color: #b9dbc9;
-    background: var(--verde-chiaro);
-    color: var(--verde-scuro);
+    border-color: var(--bordo-forte);
+    background: var(--superficie-raised);
+    color: var(--testo);
 }
 
 .pulsante-secondario:hover {
-    border-color: #9bcbb5;
-    background: #d9eee3;
+    border-color: var(--ciano);
+    background: var(--ciano-soft);
+    color: var(--ciano);
 }
 
 .selettore-acquisto > .pulsante-secondario,
@@ -658,40 +994,40 @@ tbody tr:hover td {
 
 .pulsante-salva {
     margin: 0 0 0 auto;
-    background: var(--verde-scuro);
-    color: var(--bianco);
-    box-shadow: 0 6px 14px rgb(29 89 74 / 18%);
+    background: var(--lime);
+    color: #122007;
+    box-shadow: 0 6px 18px rgb(196 249 75 / 14%);
 }
 
 .pulsante-salva:hover {
-    background: #164c3f;
+    background: #d5ff78;
 }
 
 .pulsante-salva:disabled,
 .pulsante-secondario:disabled,
 select:disabled {
     cursor: not-allowed;
-    opacity: 0.58;
+    opacity: 0.52;
 }
 
 .pulsante-tabella {
     min-height: 34px;
     padding: 6px 10px;
     border-color: var(--bordo-forte);
-    background: var(--bianco);
-    color: var(--inchiostro);
-    font-size: 0.85rem;
+    background: transparent;
+    color: var(--testo);
+    font-size: 0.76rem;
 }
 
 .pulsante-cancella {
-    border-color: #e6b8b2;
-    background: var(--rosso-chiaro);
+    border-color: rgb(255 113 128 / 62%);
+    background: transparent;
     color: var(--rosso);
 }
 
 .pulsante-cancella:hover {
-    border-color: #d99b93;
-    background: #ffe3df;
+    border-color: var(--rosso);
+    background: var(--rosso-soft);
 }
 
 .totale-vendita {
@@ -706,8 +1042,9 @@ select:disabled {
 }
 
 .totale-vendita strong {
-    color: var(--verde-scuro);
-    font-size: 1.3rem;
+    color: var(--lime);
+    font-family: var(--mono);
+    font-size: 1.35rem;
 }
 
 .storico-vendite {
@@ -722,15 +1059,17 @@ select:disabled {
 }
 
 .numero-sezione {
-    display: grid;
     width: 34px;
     height: 34px;
     flex: 0 0 34px;
+    display: grid;
     place-items: center;
-    border-radius: 10px;
-    background: var(--verde-chiaro);
-    color: var(--verde-scuro);
-    font-weight: 850;
+    border: 1px solid var(--ciano);
+    border-radius: 8px;
+    background: var(--ciano-soft);
+    color: var(--ciano);
+    font-family: var(--mono);
+    font-weight: 800;
 }
 
 .titolo-sezione-vendita h2 {
@@ -760,9 +1099,13 @@ select:disabled {
     margin-top: 4px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
     .riepilogo {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-insight-grid {
+        grid-template-columns: 1fr;
     }
 
     .campi-gestione {
@@ -780,14 +1123,14 @@ select:disabled {
     }
 
     .contenitore {
-        padding: 20px 14px;
-        border-radius: 17px;
+        padding: 24px 15px;
+        border-radius: 12px;
     }
 
     .barra-sessione {
         align-items: stretch;
         flex-direction: column;
-        border-radius: 15px;
+        border-radius: 8px;
     }
 
     .barra-sessione > span {
@@ -818,8 +1161,11 @@ select:disabled {
     }
 
     .navigazione {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         margin-bottom: 22px;
+    }
+
+    .pulsante-sezione {
+        flex-basis: calc(50% - 6px);
     }
 
     .campi-gestione,
@@ -859,13 +1205,22 @@ select:disabled {
     }
 
     .scheda-gestione,
-    .scheda-vendita {
-        padding: 18px 15px;
+    .scheda-vendita,
+    .dashboard-panel {
+        padding: 19px 15px;
     }
 
     .selettore-acquisto,
     .selettore-vendita {
         padding: 16px 13px;
+    }
+
+    .grafico-area {
+        gap: 5px;
+    }
+
+    .grafico-barre > span {
+        width: 10px;
     }
 
     table {
@@ -878,8 +1233,7 @@ select:disabled {
 }
 
 @media (max-width: 480px) {
-    .riepilogo,
-    .navigazione {
+    .riepilogo {
         grid-template-columns: 1fr;
     }
 
@@ -887,16 +1241,12 @@ select:disabled {
         padding: 6px;
     }
 
-    .pulsante-sezione {
-        min-height: 40px;
-    }
-
     .scheda-statistica {
-        min-height: 118px;
+        min-height: 126px;
     }
 
     .scheda-statistica h2 {
-        margin-bottom: 12px;
+        margin-bottom: 14px;
     }
 
     .titolo-sezione-vendita {
@@ -907,6 +1257,14 @@ select:disabled {
         width: 30px;
         height: 30px;
         flex-basis: 30px;
-        border-radius: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
     }
 }

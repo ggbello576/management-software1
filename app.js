@@ -615,6 +615,11 @@ async function caricaRiepilogoPanoramica() {
 
             conteggioRiordino.textContent = prodottiDaRiordinare;
 
+            const focusRiordino = document.querySelector("#focus-riordino");
+            if (focusRiordino) {
+                focusRiordino.textContent = prodottiDaRiordinare;
+            }
+
             if (schedaRiordino) {
                 schedaRiordino.classList.toggle(
                     "scheda-statistica-riordino",
@@ -654,6 +659,127 @@ async function caricaRiepilogoPanoramica() {
     }
 }
 
+function renderizzaGraficoMovimenti(movimenti) {
+    const grafico = document.querySelector("#grafico-movimenti");
+    const vuoto = document.querySelector("#grafico-movimenti-vuoto");
+    const focusMovimenti = document.querySelector("#focus-movimenti");
+
+    if (!grafico) {
+        return;
+    }
+
+    grafico.replaceChildren();
+
+    if (focusMovimenti) {
+        focusMovimenti.textContent = movimenti.length;
+    }
+
+    const giorni = new Map();
+
+    for (const movimento of movimenti) {
+        const data = new Date(movimento.data_movimento);
+
+        if (Number.isNaN(data.getTime())) {
+            continue;
+        }
+
+        const chiave = [
+            data.getFullYear(),
+            data.getMonth() + 1,
+            data.getDate()
+        ].join("-");
+        const giorno = giorni.get(chiave) || {
+            timestamp: data.getTime(),
+            etichetta: data.toLocaleDateString("it-IT", {
+                day: "2-digit",
+                month: "2-digit"
+            }),
+            vendite: 0,
+            acquisti: 0
+        };
+
+        if (movimento.operazione === "Vendita") {
+            giorno.vendite += 1;
+        } else if (movimento.operazione === "Acquisto") {
+            giorno.acquisti += 1;
+        }
+
+        giorni.set(chiave, giorno);
+    }
+
+    const dati = [...giorni.values()]
+        .sort((a, b) => a.timestamp - b.timestamp)
+        .filter((giorno) => giorno.vendite + giorno.acquisti > 0)
+        .slice(-7);
+
+    if (dati.length === 0) {
+        if (vuoto) {
+            vuoto.hidden = false;
+        }
+        return;
+    }
+
+    if (vuoto) {
+        vuoto.hidden = true;
+    }
+
+    const massimo = Math.max(
+        ...dati.map((giorno) => Math.max(giorno.vendite, giorno.acquisti)),
+        1
+    );
+
+    const legenda = document.createElement("div");
+    legenda.className = "grafico-legenda";
+    for (const voce of [
+        ["Vendite", "grafico-barra-vendite"],
+        ["Acquisti", "grafico-barra-acquisti"]
+    ]) {
+        const elemento = document.createElement("span");
+        elemento.className = "grafico-legenda-voce";
+        const punto = document.createElement("i");
+        punto.className = voce[1];
+        const testo = document.createElement("span");
+        testo.textContent = voce[0];
+        elemento.append(punto, testo);
+        legenda.appendChild(elemento);
+    }
+    grafico.appendChild(legenda);
+
+    const area = document.createElement("div");
+    area.className = "grafico-area";
+
+    for (const giorno of dati) {
+        const colonna = document.createElement("div");
+        colonna.className = "grafico-colonna";
+        colonna.setAttribute(
+            "aria-label",
+            `${giorno.etichetta}: ${giorno.vendite} vendite, ${giorno.acquisti} acquisti`
+        );
+
+        const barre = document.createElement("div");
+        barre.className = "grafico-barre";
+
+        for (const [valore, classe, nome] of [
+            [giorno.vendite, "grafico-barra-vendite", "vendite"],
+            [giorno.acquisti, "grafico-barra-acquisti", "acquisti"]
+        ]) {
+            const barra = document.createElement("span");
+            barra.className = classe;
+            barra.style.height = `${valore === 0 ? 0 : Math.max(14, (valore / massimo) * 100)}%`;
+            barra.title = `${giorno.etichetta}: ${valore} ${nome}`;
+            barre.appendChild(barra);
+        }
+
+        const etichetta = document.createElement("span");
+        etichetta.className = "grafico-etichetta";
+        etichetta.textContent = giorno.etichetta;
+        colonna.append(barre, etichetta);
+        area.appendChild(colonna);
+    }
+
+    grafico.appendChild(area);
+}
+
 async function caricaMovimentiRecenti() {
     const corpo = document.querySelector("#corpo-movimenti");
 
@@ -672,6 +798,7 @@ async function caricaMovimentiRecenti() {
         }
 
         const movimenti = await risposta.json();
+        renderizzaGraficoMovimenti(movimenti);
         corpo.replaceChildren();
 
         if (movimenti.length === 0) {
@@ -711,6 +838,7 @@ async function caricaMovimentiRecenti() {
         }
     } catch (errore) {
         console.error("Errore nel caricamento dei movimenti recenti:", errore);
+        renderizzaGraficoMovimenti([]);
         mostraErroreTabella(
             "#corpo-movimenti",
             4,
