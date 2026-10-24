@@ -1813,6 +1813,174 @@ select:disabled {
     }
 }
 
+/* Struttura di fondo più piena: il contenuto vive dentro una plancia, non su uno spazio vuoto. */
+body {
+    background-color: #05070c;
+    background-image:
+        radial-gradient(circle at 12% 0%, rgb(24 73 98 / 24%), transparent 28rem),
+        radial-gradient(circle at 92% 8%, rgb(76 34 58 / 18%), transparent 24rem),
+        linear-gradient(90deg, rgb(118 168 255 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(118 168 255 / 7%) 1px, transparent 1px);
+    background-size: auto, auto, 72px 72px, 72px 72px;
+}
+
+body::after {
+    position: fixed;
+    z-index: 0;
+    inset: 12px;
+    pointer-events: none;
+    border: 1px solid rgb(85 214 255 / 16%);
+    box-shadow:
+        inset 0 0 0 1px rgb(196 249 75 / 4%),
+        0 0 0 12px rgb(3 7 12 / 22%);
+    content: "";
+}
+
+.dashboard-home,
+.dashboard-page-shell {
+    background-color: #080d15;
+    background-image:
+        linear-gradient(90deg, transparent 0 216px, rgb(85 214 255 / 9%) 217px, transparent 218px),
+        linear-gradient(0deg, transparent 0 66px, rgb(196 249 75 / 6%) 67px, transparent 68px),
+        linear-gradient(90deg, rgb(255 255 255 / 2%) 1px, transparent 1px),
+        linear-gradient(rgb(255 255 255 / 2%) 1px, transparent 1px);
+    background-position: 0 0, 0 0, 0 0, 0 0;
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    box-shadow:
+        8px 8px 0 rgb(2 4 8 / 92%),
+        inset 0 0 0 1px rgb(85 214 255 / 8%);
+}
+
+.dashboard-home .dashboard-panel,
+.dashboard-page-shell .dashboard-page-insight,
+.dashboard-page-shell .scheda-gestione,
+.dashboard-page-shell .scheda-vendita {
+    position: relative;
+    overflow: hidden;
+    background-color: #0a111b;
+    background-image:
+        linear-gradient(90deg, rgb(85 214 255 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(85 214 255 / 7%) 1px, transparent 1px),
+        radial-gradient(circle at 100% 0%, rgb(37 76 102 / 24%), transparent 18rem),
+        linear-gradient(145deg, #101d2c, #080e17 72%);
+    background-size: 32px 32px, 32px 32px, auto, auto;
+    box-shadow:
+        5px 5px 0 rgb(2 4 8 / 94%),
+        inset 0 1px 0 rgb(255 255 255 / 5%);
+}
+
+.dashboard-home .dashboard-mix-panel {
+    background-image:
+        linear-gradient(90deg, rgb(255 113 128 / 6%) 1px, transparent 1px),
+        linear-gradient(rgb(255 113 128 / 5%) 1px, transparent 1px),
+        radial-gradient(circle at 100% 0%, rgb(90 38 55 / 26%), transparent 17rem),
+        linear-gradient(145deg, #17131f, #090e17 72%);
+    background-size: 32px 32px, 32px 32px, auto, auto;
+}
+
+.dashboard-home .dashboard-panel::before,
+.dashboard-page-shell .dashboard-page-insight::before,
+.dashboard-page-shell .scheda-gestione::before,
+.dashboard-page-shell .scheda-vendita::before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 18px;
+    height: 18px;
+    border-top: 2px solid var(--ciano);
+    border-left: 2px solid var(--ciano);
+    content: "";
+    opacity: 0.8;
+}
+
+.dashboard-home .dashboard-panel::after,
+.dashboard-page-shell .dashboard-page-insight::after,
+.dashboard-page-shell .scheda-gestione::after,
+.dashboard-page-shell .scheda-vendita::after {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 18px;
+    height: 18px;
+    border-right: 2px solid var(--lime);
+    border-bottom: 2px solid var(--lime);
+    content: "";
+    opacity: 0.55;
+}
+
+.dashboard-home .dashboard-mix-panel::before {
+    border-color: var(--rosso);
+}
+
+.dashboard-home .dashboard-mix-panel::after {
+    border-color: var(--rosso);
+}
+
+/* Nuova atmosfera: sfondo più profondo e pannelli centrali con una trama blueprint. */
+body {
+    background-color: #100e1b;
+    background-image:
+        radial-gradient(circle at 8% -8%, rgb(85 214 255 / 18%), transparent 28rem),
+        radial-gradient(circle at 98% 18%, rgb(196 249 75 / 9%), transparent 24rem),
+        radial-gradient(circle at 52% 100%, rgb(255 113 128 / 8%), transparent 34rem),
+        linear-gradient(90deg, rgb(118 168 255 / 5%) 1px, transparent 1px),
+        linear-gradient(rgb(118 168 255 / 5%) 1px, transparent 1px);
+    background-size: auto, auto, auto, 40px 40px, 40px 40px;
+}
+
+.dashboard-home,
+.dashboard-page-shell {
+    background-color: #151827;
+    background-image:
+        linear-gradient(135deg, rgb(85 214 255 / 5%) 25%, transparent 25%),
+        linear-gradient(315deg, rgb(196 249 75 / 3%) 25%, transparent 25%),
+        linear-gradient(90deg, rgb(255 255 255 / 2%) 1px, transparent 1px),
+        linear-gradient(rgb(255 255 255 / 2%) 1px, transparent 1px);
+    background-position: 0 0, 10px 10px, 0 0, 0 0;
+    background-size: 20px 20px, 20px 20px, 32px 32px, 32px 32px;
+}
+
+.dashboard-home .dashboard-panel,
+.dashboard-home .dashboard-page-insight,
+.dashboard-page-shell .dashboard-page-insight,
+.dashboard-page-shell .scheda-gestione,
+.dashboard-page-shell .scheda-vendita {
+    background-color: #1a2a3d;
+    background-image:
+        linear-gradient(145deg, rgb(85 214 255 / 11%), transparent 38%),
+        radial-gradient(circle at 94% 8%, rgb(196 249 75 / 7%), transparent 13rem),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 6px,
+            rgb(255 255 255 / 2%) 7px
+        );
+    background-blend-mode: screen, normal, normal;
+}
+
+.dashboard-home .dashboard-chart-panel,
+.dashboard-page-shell .dashboard-page-insight {
+    box-shadow: 5px 5px 0 rgb(3 7 12 / 88%), inset 0 1px 0 rgb(255 255 255 / 5%);
+}
+
+.dashboard-home .dashboard-mix-panel {
+    background-image:
+        linear-gradient(145deg, rgb(255 113 128 / 8%), transparent 40%),
+        radial-gradient(circle at 92% 12%, rgb(85 214 255 / 9%), transparent 12rem),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 7px,
+            rgb(255 255 255 / 1.7%) 8px
+        );
+}
+
+.dashboard-home .grafico-area,
+.dashboard-home .dashboard-page-chart-grid {
+    background-color: rgb(6 15 27 / 38%);
+    box-shadow: inset 0 0 0 1px rgb(85 214 255 / 8%);
+}
+
 @media (max-width: 520px) {
     .dashboard-home .navigazione {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1842,4 +2010,1020 @@ select:disabled {
         width: 73px;
         height: 73px;
     }
+}
+
+/* Palette operativa condivisa: riordino = giallo, acquisti = rosso, vendite = verde. */
+.dashboard-home .dashboard-stat-warning {
+    border-top-color: var(--ambra);
+    background: linear-gradient(145deg, var(--superficie-soft), var(--ambra-soft));
+}
+
+.dashboard-home .dashboard-stat-warning p {
+    color: var(--ambra);
+}
+
+.dashboard-home .scheda-statistica-acquisti,
+.dashboard-page-shell .scheda-statistica-acquisti {
+    border-top-color: var(--rosso);
+    background: linear-gradient(145deg, var(--superficie-soft), var(--rosso-soft));
+}
+
+.dashboard-home .scheda-statistica-acquisti p,
+.dashboard-page-shell .scheda-statistica-acquisti p {
+    color: var(--rosso);
+}
+
+.dashboard-home .scheda-statistica-vendite,
+.dashboard-page-shell .scheda-statistica-vendite {
+    border-top-color: var(--verde);
+    background: linear-gradient(145deg, var(--superficie-soft), rgb(20 61 47 / 72%));
+}
+
+.dashboard-home .scheda-statistica-vendite p,
+.dashboard-page-shell .scheda-statistica-vendite p {
+    color: var(--verde);
+}
+
+.dashboard-home .grafico-barra-vendite,
+.dashboard-page-shell .grafico-barra-vendite {
+    background: var(--verde);
+    box-shadow: 0 0 16px rgb(94 227 166 / 22%);
+}
+
+.dashboard-home .grafico-barra-acquisti,
+.dashboard-page-shell .grafico-barra-acquisti {
+    background: var(--rosso);
+    box-shadow: 0 0 16px rgb(255 113 128 / 20%);
+}
+
+.dashboard-home .grafico-legenda-voce .grafico-barra-vendite,
+.dashboard-page-shell .grafico-legenda-voce .grafico-barra-vendite {
+    background: var(--verde);
+    box-shadow: none;
+}
+
+.dashboard-home .grafico-legenda-voce .grafico-barra-acquisti,
+.dashboard-page-shell .grafico-legenda-voce .grafico-barra-acquisti {
+    background: var(--rosso);
+    box-shadow: none;
+}
+
+.grafico-ciambella {
+    background: conic-gradient(var(--verde) 0 var(--vendite), var(--rosso) var(--vendite) 100%);
+}
+
+.movimento-vendita td {
+    background: rgb(20 61 47 / 72%);
+    color: var(--verde);
+}
+
+.movimento-acquisto td {
+    background: rgb(57 29 37 / 76%);
+    color: var(--rosso);
+}
+
+/* Shell condivisa per tutte le sezioni, con gli stessi menu della home. */
+.dashboard-page-shell {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    min-height: calc(100vh - 110px);
+    margin: 0 auto 32px;
+    padding: clamp(24px, 3.2vw, 38px);
+    display: grid;
+    grid-template-columns: 218px minmax(0, 1fr);
+    gap: clamp(26px, 4vw, 44px);
+    overflow: hidden;
+}
+
+.dashboard-page-shell::after {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    width: 46px;
+    height: 46px;
+    border-right: 1px solid rgb(85 214 255 / 35%);
+    border-bottom: 1px solid rgb(85 214 255 / 35%);
+    content: "";
+}
+
+.dashboard-page-shell .dashboard-sidebar {
+    position: relative;
+    min-width: 0;
+    padding: 3px 22px 0 0;
+    border-right: 1px solid var(--bordo);
+}
+
+.dashboard-page-shell .dashboard-sidebar::after {
+    position: absolute;
+    top: 5px;
+    right: -2px;
+    width: 3px;
+    height: 42px;
+    background: var(--lime);
+    box-shadow: 0 0 16px rgb(196 249 75 / 45%);
+    content: "";
+}
+
+.dashboard-page-shell .dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 38px;
+}
+
+.dashboard-page-shell .dashboard-brand-mark {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--lime);
+    background: var(--lime);
+    color: #111b12;
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    font-weight: 900;
+    box-shadow: 5px 5px 0 rgb(85 214 255 / 30%);
+}
+
+.dashboard-page-shell .dashboard-brand strong,
+.dashboard-page-shell .dashboard-brand small {
+    display: block;
+}
+
+.dashboard-page-shell .dashboard-brand strong {
+    color: var(--testo);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+}
+
+.dashboard-page-shell .dashboard-brand small {
+    margin-top: 3px;
+    color: var(--testo-terziario);
+    font-size: 0.68rem;
+}
+
+.dashboard-page-shell .dashboard-sidebar-label {
+    margin: 0 0 10px;
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.dashboard-page-shell .navigazione {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.dashboard-page-shell .pulsante-sezione {
+    min-height: 39px;
+    display: grid;
+    grid-template-columns: 25px minmax(0, 1fr);
+    justify-items: start;
+    gap: 8px;
+    padding: 8px 9px;
+    border-color: transparent;
+    border-radius: 6px;
+    color: var(--testo-secondario);
+    font-size: 0.76rem;
+    font-weight: 720;
+    text-align: left;
+}
+
+.dashboard-page-shell .pulsante-sezione:hover {
+    border-color: var(--bordo);
+    background: var(--superficie-raised);
+    color: var(--testo);
+    transform: translateX(2px);
+}
+
+.dashboard-page-shell .pulsante-sezione.attivo {
+    border-color: rgb(196 249 75 / 55%);
+    background: linear-gradient(90deg, rgb(196 249 75 / 17%), transparent);
+    color: var(--lime);
+    box-shadow: inset 3px 0 0 var(--lime);
+}
+
+.dashboard-page-shell .nav-icon {
+    width: 25px;
+    color: var(--ciano);
+    font-family: var(--mono);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.dashboard-page-shell .pulsante-sezione.attivo .nav-icon {
+    color: var(--lime);
+}
+
+.dashboard-page-shell .dashboard-sidebar-card {
+    margin-top: 30px;
+    padding: 15px 13px;
+    border: 1px solid var(--bordo);
+    border-left: 3px solid var(--ciano);
+    background: linear-gradient(145deg, var(--ciano-soft), var(--superficie-input));
+}
+
+.dashboard-page-shell .dashboard-sidebar-card-label,
+.dashboard-page-shell .dashboard-sidebar-card-note {
+    display: block;
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.03em;
+}
+
+.dashboard-page-shell .dashboard-sidebar-card strong {
+    display: block;
+    margin: 7px 0 3px;
+    color: var(--ciano);
+    font-family: var(--mono);
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+.dashboard-page-shell .dashboard-main {
+    min-width: 0;
+}
+
+.dashboard-page-shell .intestazione {
+    margin-bottom: 22px;
+}
+
+.dashboard-page-shell .link-home {
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+}
+
+.dashboard-page-shell .link-home:hover {
+    color: var(--lime);
+}
+
+.dashboard-page-shell .scheda-gestione,
+.dashboard-page-shell .scheda-vendita {
+    margin-top: 15px;
+}
+
+.dashboard-page-shell .dashboard-page-main > .scheda-gestione:first-of-type,
+.dashboard-page-shell .dashboard-page-main > .form-vendita:first-of-type {
+    margin-top: 0;
+}
+
+.dashboard-page-insight {
+    margin: 0 0 18px;
+    padding: 17px;
+    border: 1px solid var(--bordo);
+    border-radius: 7px;
+    background: linear-gradient(155deg, var(--superficie), #0c151e);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 18%);
+}
+
+.dashboard-page-insight-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.dashboard-page-insight-heading .soprattitolo {
+    margin-bottom: 7px;
+}
+
+.dashboard-page-insight-heading h2 {
+    margin-bottom: 0;
+    font-size: 1.08rem;
+}
+
+.dashboard-page-insight-description {
+    margin: 5px 0 13px;
+    color: var(--testo-secondario);
+    font-size: 0.75rem;
+}
+
+.dashboard-page-chart {
+    min-height: 120px;
+}
+
+.dashboard-page-chart-grid {
+    height: 112px;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(30px, 1fr));
+    align-items: end;
+    gap: 9px;
+    padding: 8px 2px 0;
+    border-bottom: 1px solid var(--bordo-forte);
+    background: repeating-linear-gradient(to bottom, transparent 0, transparent 34px, rgb(162 176 191 / 7%) 35px, transparent 36px);
+}
+
+.dashboard-page-chart-column {
+    min-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dashboard-page-chart-column > span:first-child {
+    width: min(100%, 22px);
+    min-height: 7px;
+    display: block;
+    border-radius: 3px 3px 1px 1px;
+    background: var(--verde);
+    box-shadow: 0 0 14px rgb(94 227 166 / 17%);
+}
+
+.dashboard-page-chart-column.warning > span:first-child {
+    background: var(--ambra);
+    box-shadow: 0 0 14px rgb(255 184 77 / 17%);
+}
+
+.dashboard-page-chart-column.purchase > span:first-child {
+    background: var(--rosso);
+    box-shadow: 0 0 14px rgb(255 113 128 / 17%);
+}
+
+.dashboard-page-chart-column > span:last-child {
+    overflow: hidden;
+    color: var(--testo-terziario);
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dashboard-page-chart-empty {
+    min-height: 80px;
+    display: grid;
+    place-items: center;
+    color: var(--testo-terziario);
+    font-size: 0.78rem;
+}
+
+@media (max-width: 780px) {
+    .dashboard-page-shell {
+        display: block;
+    }
+
+    .dashboard-page-shell .dashboard-sidebar {
+        margin-bottom: 25px;
+        padding: 0 0 20px;
+        border-right: 0;
+        border-bottom: 1px solid var(--bordo);
+    }
+
+    .dashboard-page-shell .dashboard-sidebar::after {
+        top: auto;
+        right: auto;
+        bottom: -2px;
+        left: 0;
+        width: 48px;
+        height: 3px;
+    }
+
+    .dashboard-page-shell .dashboard-brand {
+        margin-bottom: 20px;
+    }
+
+    .dashboard-page-shell .navigazione {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dashboard-page-shell .dashboard-sidebar-card {
+        display: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .dashboard-page-shell .navigazione {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-page-chart-grid {
+        gap: 5px;
+    }
+}
+
+/* Retro hard: carattere terminale, pixel netti e contrasto alto senza sacrificare la lettura. */
+:root {
+    --font: Arial, Helvetica, sans-serif;
+    --pixel-font: "Courier New", "Lucida Console", monospace;
+    --pixel-shadow: 5px 5px 0 rgb(3 7 12 / 88%);
+    --pixel-shadow-small: 3px 3px 0 rgb(3 7 12 / 88%);
+}
+
+body {
+    position: relative;
+    background-image:
+        linear-gradient(90deg, rgb(85 214 255 / 5%) 1px, transparent 1px),
+        linear-gradient(rgb(85 214 255 / 5%) 1px, transparent 1px),
+        radial-gradient(circle at 12% 0%, rgb(85 214 255 / 11%), transparent 30rem),
+        radial-gradient(circle at 88% 5%, rgb(196 249 75 / 7%), transparent 26rem);
+    background-size: 32px 32px, 32px 32px, auto, auto;
+}
+
+body::before {
+    position: fixed;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        rgb(255 255 255 / 2.3%) 4px
+    );
+    content: "";
+    opacity: 0.48;
+}
+
+body > main,
+.barra-sessione {
+    position: relative;
+    z-index: 1;
+}
+
+h1,
+h2,
+h3,
+.soprattitolo,
+.dashboard-brand strong,
+.dashboard-sidebar-label,
+.dashboard-sidebar-card-label,
+.dashboard-sidebar-card-note,
+.dashboard-panel-badge,
+.dashboard-panel-status,
+.stat-card-symbol,
+.movement-count,
+th,
+.grafico-etichetta,
+.grafico-legenda,
+.grafico-mix-legend,
+.dashboard-page-chart-column > span:last-child {
+    font-family: var(--pixel-font);
+}
+
+h1,
+h2,
+h3 {
+    text-shadow: 2px 2px 0 rgb(3 7 12 / 88%);
+}
+
+h1 {
+    letter-spacing: 0.015em;
+    font-weight: 900;
+}
+
+h2 {
+    letter-spacing: 0.025em;
+    font-weight: 900;
+}
+
+.barra-sessione {
+    border-width: 2px;
+    border-radius: 0;
+    background: #0b131d;
+    box-shadow: var(--pixel-shadow-small);
+    font-family: var(--pixel-font);
+    font-size: 0.77rem;
+}
+
+.barra-sessione .pulsante-secondario,
+.barra-sessione select {
+    border-radius: 0;
+    border-width: 2px;
+}
+
+.contenitore,
+.dashboard-page-shell {
+    border-width: 2px;
+    border-radius: 0;
+    box-shadow: var(--pixel-shadow);
+}
+
+.contenitore::before,
+.dashboard-home::before {
+    right: 8%;
+    left: 8%;
+    height: 4px;
+    border-radius: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--ciano) 0,
+        var(--ciano) 18px,
+        var(--lime) 18px,
+        var(--lime) 36px,
+        transparent 36px,
+        transparent 48px
+    );
+    box-shadow: 0 3px 0 rgb(3 7 12 / 70%);
+}
+
+.dashboard-home,
+.dashboard-page-shell {
+    background-color: #0d1722;
+    background-image:
+        linear-gradient(135deg, rgb(85 214 255 / 3%) 25%, transparent 25%),
+        linear-gradient(315deg, rgb(196 249 75 / 2%) 25%, transparent 25%);
+    background-position: 0 0, 8px 8px;
+    background-size: 16px 16px;
+}
+
+.dashboard-home .dashboard-sidebar,
+.dashboard-page-shell .dashboard-sidebar {
+    border-right-width: 2px;
+}
+
+.dashboard-home .dashboard-sidebar::after,
+.dashboard-page-shell .dashboard-sidebar::after {
+    width: 5px;
+    right: -3px;
+    box-shadow: 3px 0 0 rgb(3 7 12 / 75%), 0 0 16px rgb(196 249 75 / 45%);
+}
+
+.dashboard-brand-mark,
+.dashboard-home .dashboard-brand-mark,
+.dashboard-page-shell .dashboard-brand-mark {
+    border-width: 2px;
+    box-shadow: 5px 5px 0 var(--ciano), 8px 8px 0 rgb(3 7 12 / 88%);
+    font-family: var(--pixel-font);
+}
+
+.dashboard-home .pulsante-sezione,
+.dashboard-page-shell .pulsante-sezione {
+    min-height: 43px;
+    border-width: 2px;
+    border-radius: 0;
+    font-family: var(--pixel-font);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+}
+
+.dashboard-home .pulsante-sezione:hover,
+.dashboard-page-shell .pulsante-sezione:hover {
+    box-shadow: var(--pixel-shadow-small);
+    transform: translate(-1px, -1px);
+}
+
+.dashboard-home .pulsante-sezione.attivo,
+.dashboard-page-shell .pulsante-sezione.attivo {
+    border-color: var(--lime);
+    background: #1d321d;
+    box-shadow: inset 5px 0 0 var(--lime), var(--pixel-shadow-small);
+}
+
+.nav-icon {
+    font-family: var(--pixel-font);
+    font-weight: 900;
+    text-shadow: 2px 2px 0 rgb(3 7 12 / 90%);
+}
+
+.dashboard-home .dashboard-sidebar-card,
+.dashboard-page-shell .dashboard-sidebar-card {
+    border-width: 2px;
+    border-left-width: 5px;
+    border-radius: 0;
+    box-shadow: var(--pixel-shadow-small);
+}
+
+.dashboard-home .scheda-statistica,
+.dashboard-home .dashboard-panel,
+.dashboard-page-shell .dashboard-page-insight,
+.dashboard-page-shell .scheda-gestione,
+.dashboard-page-shell .scheda-vendita {
+    border-width: 2px;
+    border-radius: 0;
+    box-shadow: var(--pixel-shadow-small);
+}
+
+.dashboard-home .scheda-statistica {
+    border-top-width: 5px;
+}
+
+.dashboard-home .scheda-statistica h2,
+.dashboard-page-shell .dashboard-page-insight h2 {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+}
+
+.dashboard-home .scheda-statistica p,
+.dashboard-page-shell .dashboard-sidebar-card strong {
+    font-family: var(--pixel-font);
+    text-shadow: 2px 2px 0 rgb(3 7 12 / 88%);
+}
+
+.dashboard-home .dashboard-panel-heading h2,
+.dashboard-page-insight-heading h2,
+.section-heading-row h2 {
+    text-transform: uppercase;
+}
+
+.dashboard-home .dashboard-panel-badge,
+.dashboard-home .dashboard-panel-status,
+.dashboard-page-insight .dashboard-panel-badge {
+    border-radius: 0;
+    border-width: 2px;
+}
+
+.dashboard-home .grafico-area,
+.dashboard-page-chart-grid {
+    border-bottom-width: 2px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 34px,
+        rgb(85 214 255 / 11%) 35px,
+        transparent 36px
+    );
+}
+
+.dashboard-home .grafico-barre > span,
+.dashboard-page-chart-column > span:first-child {
+    border-radius: 0;
+    box-shadow: 3px 0 0 rgb(3 7 12 / 85%);
+}
+
+.grafico-ciambella {
+    border: 4px solid #0a1119;
+    box-shadow: 4px 4px 0 rgb(3 7 12 / 88%);
+}
+
+.dashboard-focus-strip,
+.dashboard-home .tabella-scroll,
+.dashboard-page-shell .tabella-scroll,
+.dashboard-page-shell .tabella-gestione-scroll,
+.dashboard-page-shell .tabella-vendita-scroll {
+    border-radius: 0;
+}
+
+.dashboard-home table,
+.dashboard-page-shell table {
+    border: 1px solid var(--bordo-forte);
+}
+
+.dashboard-home th,
+.dashboard-home td,
+.dashboard-page-shell th,
+.dashboard-page-shell td {
+    border-bottom-width: 2px;
+}
+
+.dashboard-home td,
+.dashboard-page-shell td {
+    font-size: 0.86rem;
+}
+
+.pulsante,
+.pulsante-secondario,
+.pulsante-salva,
+.pulsante-tabella,
+.dashboard-page-shell input,
+.dashboard-page-shell select,
+.dashboard-page-shell textarea {
+    border-radius: 0;
+}
+
+.dashboard-page-shell .pulsante,
+.dashboard-page-shell .pulsante-secondario,
+.dashboard-page-shell .pulsante-salva,
+.dashboard-page-shell .pulsante-tabella {
+    border-width: 2px;
+    box-shadow: var(--pixel-shadow-small);
+}
+
+.dashboard-page-shell .pulsante:hover,
+.dashboard-page-shell .pulsante-secondario:hover,
+.dashboard-page-shell .pulsante-salva:hover,
+.dashboard-page-shell .pulsante-tabella:hover {
+    transform: translate(-1px, -1px);
+}
+
+.dashboard-page-shell input,
+.dashboard-page-shell select,
+.dashboard-page-shell textarea {
+    border-width: 2px;
+}
+
+.dashboard-page-shell .campo-gestione label,
+.dashboard-page-shell .pagina-vendite label {
+    font-size: 0.86rem;
+}
+
+@media (max-width: 780px) {
+    .contenitore,
+    .dashboard-page-shell {
+        box-shadow: 4px 4px 0 rgb(3 7 12 / 88%);
+    }
+
+    .dashboard-home .dashboard-sidebar,
+    .dashboard-page-shell .dashboard-sidebar {
+        border-right: 0;
+        border-bottom-width: 2px;
+    }
+
+    .dashboard-home .dashboard-sidebar::after,
+    .dashboard-page-shell .dashboard-sidebar::after {
+        right: auto;
+        bottom: -3px;
+        left: 0;
+        width: 48px;
+        height: 5px;
+    }
+}
+
+/* Final background pass: plancia scura e costruita, lasciando invariati i grafici. */
+body {
+    background-color: #05070c;
+    background-image:
+        radial-gradient(circle at 12% 0%, rgb(24 73 98 / 24%), transparent 28rem),
+        radial-gradient(circle at 92% 8%, rgb(76 34 58 / 18%), transparent 24rem),
+        linear-gradient(90deg, rgb(118 168 255 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(118 168 255 / 7%) 1px, transparent 1px);
+    background-size: auto, auto, 72px 72px, 72px 72px;
+}
+
+body::after {
+    position: fixed;
+    z-index: 0;
+    inset: 12px;
+    pointer-events: none;
+    border: 1px solid rgb(85 214 255 / 16%);
+    box-shadow: inset 0 0 0 1px rgb(196 249 75 / 4%), 0 0 0 12px rgb(3 7 12 / 22%);
+    content: "";
+}
+
+.dashboard-home,
+.dashboard-page-shell {
+    background-color: #080d15;
+    background-image:
+        linear-gradient(90deg, transparent 0 216px, rgb(85 214 255 / 9%) 217px, transparent 218px),
+        linear-gradient(0deg, transparent 0 66px, rgb(196 249 75 / 6%) 67px, transparent 68px),
+        linear-gradient(90deg, rgb(255 255 255 / 2%) 1px, transparent 1px),
+        linear-gradient(rgb(255 255 255 / 2%) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    box-shadow: 8px 8px 0 rgb(2 4 8 / 92%), inset 0 0 0 1px rgb(85 214 255 / 8%);
+}
+
+.dashboard-home .dashboard-panel,
+.dashboard-page-shell .dashboard-page-insight,
+.dashboard-page-shell .scheda-gestione,
+.dashboard-page-shell .scheda-vendita {
+    position: relative;
+    overflow: hidden;
+    background-color: #0a111b;
+    background-image:
+        linear-gradient(90deg, rgb(85 214 255 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(85 214 255 / 7%) 1px, transparent 1px),
+        radial-gradient(circle at 100% 0%, rgb(37 76 102 / 24%), transparent 18rem),
+        linear-gradient(145deg, #101d2c, #080e17 72%);
+    background-size: 32px 32px, 32px 32px, auto, auto;
+    box-shadow: 5px 5px 0 rgb(2 4 8 / 94%), inset 0 1px 0 rgb(255 255 255 / 5%);
+}
+
+.dashboard-home .dashboard-mix-panel {
+    background-image:
+        linear-gradient(90deg, rgb(255 113 128 / 6%) 1px, transparent 1px),
+        linear-gradient(rgb(255 113 128 / 5%) 1px, transparent 1px),
+        radial-gradient(circle at 100% 0%, rgb(90 38 55 / 26%), transparent 17rem),
+        linear-gradient(145deg, #17131f, #090e17 72%);
+    background-size: 32px 32px, 32px 32px, auto, auto;
+}
+
+.dashboard-home .dashboard-panel::before,
+.dashboard-page-shell .dashboard-page-insight::before,
+.dashboard-page-shell .scheda-gestione::before,
+.dashboard-page-shell .scheda-vendita::before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 18px;
+    height: 18px;
+    border-top: 2px solid var(--ciano);
+    border-left: 2px solid var(--ciano);
+    content: "";
+    opacity: 0.8;
+}
+
+.dashboard-home .dashboard-panel::after,
+.dashboard-page-shell .dashboard-page-insight::after,
+.dashboard-page-shell .scheda-gestione::after,
+.dashboard-page-shell .scheda-vendita::after {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 18px;
+    height: 18px;
+    border-right: 2px solid var(--lime);
+    border-bottom: 2px solid var(--lime);
+    content: "";
+    opacity: 0.55;
+}
+
+.dashboard-home .dashboard-mix-panel::before,
+.dashboard-home .dashboard-mix-panel::after {
+    border-color: var(--rosso);
+}
+
+/* Niente trattini decorativi sopra la plancia o sopra le pagine interne. */
+.contenitore::before,
+.dashboard-home::before,
+.dashboard-page-shell::before,
+.pagina-vendite::before {
+    display: none !important;
+}
+
+/* Logo monocromatico: monogramma netto, leggibile e senza accenti colorati. */
+.dashboard-brand-mark,
+.dashboard-home .dashboard-brand-mark,
+.dashboard-page-shell .dashboard-brand-mark {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border: 2px solid #fff;
+    background: #000;
+    color: #fff;
+    box-shadow: 4px 4px 0 #fff;
+    font-size: 0;
+}
+
+.dashboard-brand-mark::before {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    content: "KS";
+    font-family: var(--pixel-font);
+    font-size: 0.92rem;
+    font-weight: 900;
+    letter-spacing: -0.1em;
+}
+
+.dashboard-brand-mark::after {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 7px;
+    height: 7px;
+    background: #fff;
+    content: "";
+}
+
+.dashboard-brand strong,
+.dashboard-home .dashboard-brand strong,
+.dashboard-page-shell .dashboard-brand strong {
+    color: #fff;
+}
+
+.dashboard-brand small,
+.dashboard-home .dashboard-brand small,
+.dashboard-page-shell .dashboard-brand small {
+    color: rgb(255 255 255 / 72%);
+}
+
+/* Sfondo esterno completamente nero: la costruzione resta solo dentro la plancia. */
+body {
+    background: #000;
+}
+
+body::before,
+body::after {
+    display: none;
+}
+
+/* Interno nero e separatori bianchi ad alto contrasto. */
+.dashboard-home,
+.dashboard-page-shell {
+    background-color: #000;
+    background-image:
+        linear-gradient(90deg, transparent 0 216px, rgb(255 255 255 / 58%) 217px, transparent 219px),
+        linear-gradient(0deg, transparent 0 66px, rgb(255 255 255 / 32%) 67px, transparent 69px),
+        linear-gradient(90deg, rgb(255 255 255 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+}
+
+.dashboard-home .dashboard-sidebar,
+.dashboard-page-shell .dashboard-sidebar {
+    border-color: rgb(255 255 255 / 72%);
+}
+
+.dashboard-home .dashboard-sidebar-card,
+.dashboard-page-shell .dashboard-sidebar-card {
+    background: #000;
+    border-color: rgb(255 255 255 / 48%);
+    border-left-color: var(--ciano);
+}
+
+.dashboard-home .dashboard-panel,
+.dashboard-page-shell .dashboard-page-insight,
+.dashboard-page-shell .scheda-gestione,
+.dashboard-page-shell .scheda-vendita {
+    background-color: #000;
+    background-image:
+        linear-gradient(90deg, rgb(255 255 255 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px);
+    background-size: 32px 32px;
+    border-color: rgb(255 255 255 / 58%);
+}
+
+.dashboard-home .dashboard-mix-panel {
+    background-color: #000;
+    background-image:
+        linear-gradient(90deg, rgb(255 255 255 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(255 255 255 / 7%) 1px, transparent 1px);
+}
+
+.dashboard-home table,
+.dashboard-page-shell table {
+    background: #000;
+    border-color: rgb(255 255 255 / 58%);
+}
+
+.dashboard-home th,
+.dashboard-home td,
+.dashboard-page-shell th,
+.dashboard-page-shell td {
+    border-bottom-color: rgb(255 255 255 / 28%);
+}
+
+/* Nero pieno, senza texture: il bianco resta solo sulle separazioni principali. */
+.barra-sessione {
+    background: #000;
+    border-color: #fff;
+    box-shadow: none;
+}
+
+.dashboard-home,
+.dashboard-page-shell {
+    background: #000;
+    border-color: #fff;
+    box-shadow: none;
+}
+
+.dashboard-home .dashboard-sidebar,
+.dashboard-page-shell .dashboard-sidebar {
+    border-right-color: #fff;
+}
+
+.dashboard-home .dashboard-sidebar-card,
+.dashboard-page-shell .dashboard-sidebar-card {
+    background: #000;
+    border-color: #fff;
+    border-left-color: var(--ciano);
+    box-shadow: none;
+}
+
+.dashboard-home .dashboard-panel,
+.dashboard-page-shell .dashboard-page-insight,
+.dashboard-page-shell .scheda-gestione,
+.dashboard-page-shell .scheda-vendita {
+    background: #000;
+    background-image: none;
+    border-color: #fff;
+    box-shadow: none;
+}
+
+.dashboard-home .dashboard-mix-panel {
+    background: #000;
+    background-image: none;
+}
+
+.dashboard-home table,
+.dashboard-page-shell table {
+    background: #000;
+    border-color: #fff;
+}
+
+/* Accento menu unificato con i simboli azzurri. */
+.dashboard-home .dashboard-sidebar::after,
+.dashboard-page-shell .dashboard-sidebar::after {
+    background: var(--ciano);
+    box-shadow: 3px 0 0 rgb(3 7 12 / 75%), 0 0 16px rgb(85 214 255 / 48%);
+}
+
+.dashboard-home .pulsante-sezione.attivo,
+.dashboard-page-shell .pulsante-sezione.attivo {
+    border-color: var(--ciano);
+    background: rgb(85 214 255 / 10%);
+    color: var(--ciano);
+    box-shadow: inset 5px 0 0 var(--ciano), 3px 3px 0 rgb(3 7 12 / 88%);
+}
+
+.dashboard-home .pulsante-sezione.attivo .nav-icon,
+.dashboard-page-shell .pulsante-sezione.attivo .nav-icon {
+    color: var(--ciano);
 }

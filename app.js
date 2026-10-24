@@ -5,7 +5,158 @@ let righeVendita = [];
 let prodottiPerAcquisto = [];
 let righeAcquisto = [];
 const paginaLogin = window.location.pathname === "/login";
+const paginaHome = ["/", "/index.html"].includes(window.location.pathname);
 let sessioneCorrente = null;
+
+const vociNavigazione = [
+    ["/", "⌂", "Panoramica"],
+    ["/magazzino", "▦", "Magazzino"],
+    ["/prodotti", "□", "Prodotti"],
+    ["/servizi", "✦", "Servizi"],
+    ["/fornitori", "⌁", "Fornitori"],
+    ["/clienti", "♙", "Clienti"],
+    ["/vendite", "↗", "Vendite"],
+    ["/acquisti", "↙", "Acquisti"],
+    ["/conteggio-iniziale", "#", "Conteggio iniziale"]
+];
+
+function creaSidebarCondivisa() {
+    const sidebar = document.createElement("aside");
+    sidebar.className = "dashboard-sidebar";
+
+    const brand = document.createElement("div");
+    brand.className = "dashboard-brand";
+    brand.setAttribute("aria-label", "Kind SQL gestionale");
+
+    const brandMark = document.createElement("span");
+    brandMark.className = "dashboard-brand-mark";
+    brandMark.textContent = "K";
+
+    const brandText = document.createElement("span");
+    const brandName = document.createElement("strong");
+    brandName.textContent = "KIND SQL";
+    const brandDescription = document.createElement("small");
+    brandDescription.textContent = "salone manager";
+    brandText.append(brandName, brandDescription);
+    brand.append(brandMark, brandText);
+
+    const label = document.createElement("p");
+    label.className = "dashboard-sidebar-label";
+    label.textContent = "Workspace";
+
+    const nav = document.createElement("nav");
+    nav.className = "navigazione";
+    nav.setAttribute("aria-label", "Navigazione principale");
+
+    for (const [href, simbolo, testo] of vociNavigazione) {
+        const link = document.createElement("a");
+        link.href = href;
+        link.className = "pulsante-sezione";
+
+        const percorsoAttuale = window.location.pathname;
+        const attivo = href === "/"
+            ? paginaHome
+            : percorsoAttuale === href || percorsoAttuale.startsWith(`${href}/`);
+
+        if (attivo) {
+            link.classList.add("attivo");
+            link.setAttribute("aria-current", "page");
+        }
+
+        const iconaElemento = document.createElement("span");
+        iconaElemento.className = "nav-icon";
+        iconaElemento.setAttribute("aria-hidden", "true");
+        iconaElemento.textContent = simbolo;
+
+        const etichetta = document.createElement("span");
+        etichetta.textContent = testo;
+        link.append(iconaElemento, etichetta);
+        nav.appendChild(link);
+    }
+
+    const card = document.createElement("div");
+    card.className = "dashboard-sidebar-card";
+    const cardLabel = document.createElement("span");
+    cardLabel.className = "dashboard-sidebar-card-label";
+    cardLabel.textContent = "Clienti registrati";
+    const cardValue = document.createElement("strong");
+    cardValue.id = "conteggio-clienti";
+    cardValue.textContent = "...";
+    const cardNote = document.createElement("span");
+    cardNote.className = "dashboard-sidebar-card-note";
+    cardNote.textContent = "archivio attivo";
+    card.append(cardLabel, cardValue, cardNote);
+
+    sidebar.append(brand, label, nav, card);
+    return sidebar;
+}
+
+function creaVisualizzazioneSezione() {
+    const contenuto = document.createElement("section");
+    contenuto.className = "dashboard-page-insight";
+
+    const configurazioni = {
+        "/magazzino": ["GRAFICO MAGAZZINO", "Stato delle scorte", "grafico-sezione-magazzino", "Prodotti sotto soglia in evidenza."],
+        "/acquisti": ["GRAFICO ACQUISTI", "Andamento acquisti", "grafico-sezione-acquisti", "Ultimi acquisti registrati per importo."],
+        "/vendite": ["GRAFICO VENDITE", "Andamento vendite", "grafico-sezione-vendite", "Ultime vendite registrate per importo."],
+        "/prodotti": ["CATALOGO", "Prezzi del catalogo", "grafico-sezione-prodotti", "I prodotti presenti nel catalogo attivo."]
+    };
+    const configurazione = configurazioni[window.location.pathname];
+
+    if (!configurazione) {
+        return null;
+    }
+
+    const [etichetta, titolo, idGrafico, descrizione] = configurazione;
+    contenuto.innerHTML = `
+        <div class="dashboard-page-insight-heading">
+            <div>
+                <p class="soprattitolo">${etichetta}</p>
+                <h2>${titolo}</h2>
+            </div>
+            <span class="dashboard-panel-badge">DATI API</span>
+        </div>
+        <p class="dashboard-page-insight-description">${descrizione}</p>
+        <div id="${idGrafico}" class="dashboard-page-chart" role="img" aria-label="${titolo}"></div>
+    `;
+    return contenuto;
+}
+
+function applicaShellGestionale() {
+    if (paginaLogin || paginaHome || document.querySelector(".dashboard-home")) {
+        return;
+    }
+
+    const principale = document.querySelector("main");
+
+    if (!principale || principale.dataset.shellApplicata === "true") {
+        return;
+    }
+
+    const navigazioneEsistente = principale.querySelector(":scope > nav.navigazione");
+    if (navigazioneEsistente) {
+        navigazioneEsistente.remove();
+    }
+
+    const contenuto = document.createElement("div");
+    contenuto.className = "dashboard-main dashboard-page-main";
+
+    for (const figlio of [...principale.children]) {
+        contenuto.appendChild(figlio);
+    }
+
+    const visualizzazione = creaVisualizzazioneSezione();
+    const intestazione = contenuto.querySelector(":scope > header");
+    if (visualizzazione && intestazione) {
+        intestazione.insertAdjacentElement("afterend", visualizzazione);
+    }
+
+    principale.classList.add("dashboard-page-shell");
+    principale.dataset.shellApplicata = "true";
+    principale.replaceChildren(creaSidebarCondivisa(), contenuto);
+}
+
+applicaShellGestionale();
 
 function leggiCookie(nome) {
     const voce = document.cookie
@@ -323,6 +474,100 @@ function fetchDati(url, opzioni = {}) {
     });
 }
 
+function renderizzaColonneSezione(idGrafico, dati) {
+    const grafico = document.querySelector(`#${idGrafico}`);
+
+    if (!grafico) {
+        return;
+    }
+
+    grafico.replaceChildren();
+
+    if (!dati || dati.length === 0) {
+        const vuoto = document.createElement("div");
+        vuoto.className = "dashboard-page-chart-empty";
+        vuoto.textContent = "Nessun dato disponibile.";
+        grafico.appendChild(vuoto);
+        return;
+    }
+
+    const area = document.createElement("div");
+    area.className = "dashboard-page-chart-grid";
+    const massimo = Math.max(...dati.map((dato) => dato.valore), 1);
+
+    for (const dato of dati.slice(-7)) {
+        const colonna = document.createElement("div");
+        colonna.className = "dashboard-page-chart-column";
+
+        if (dato.classe) {
+            colonna.classList.add(dato.classe);
+        }
+
+        const barra = document.createElement("span");
+        barra.style.height = `${Math.max(8, (dato.valore / massimo) * 100)}%`;
+        barra.title = `${dato.etichetta}: ${dato.valore}`;
+
+        const etichetta = document.createElement("span");
+        etichetta.textContent = dato.etichetta;
+        etichetta.title = dato.etichetta;
+
+        colonna.append(barra, etichetta);
+        area.appendChild(colonna);
+    }
+
+    grafico.appendChild(area);
+}
+
+function renderizzaGraficoMagazzino(prodotti) {
+    const dati = prodotti
+        .slice()
+        .sort((a, b) => Number(a.giacenza) - Number(b.giacenza))
+        .slice(0, 7)
+        .map((prodotto) => ({
+            etichetta: prodotto.nome,
+            valore: Math.max(0, Number(prodotto.giacenza)),
+            classe: Number(prodotto.giacenza) <= Number(prodotto.soglia_riordino)
+                ? "warning"
+                : ""
+        }));
+
+    renderizzaColonneSezione("grafico-sezione-magazzino", dati);
+}
+
+function renderizzaGraficoRegistro(registro, tipo) {
+    const dati = registro
+        .slice()
+        .reverse()
+        .map((elemento) => ({
+            etichetta: new Date(tipo === "vendita"
+                ? elemento.data_vendita
+                : elemento.data_acquisto).toLocaleDateString("it-IT", {
+                    day: "2-digit",
+                    month: "2-digit"
+                }),
+            valore: Math.max(0, Number(elemento.totale) || 0),
+            classe: tipo === "acquisto" ? "purchase" : ""
+        }));
+
+    renderizzaColonneSezione(
+        tipo === "vendita" ? "grafico-sezione-vendite" : "grafico-sezione-acquisti",
+        dati
+    );
+}
+
+function renderizzaGraficoCatalogo(prodotti) {
+    const dati = prodotti
+        .slice()
+        .sort((a, b) => Number(a.prezzo_vendita) - Number(b.prezzo_vendita))
+        .slice(-7)
+        .map((prodotto) => ({
+            etichetta: prodotto.nome,
+            valore: Math.max(0, Number(prodotto.prezzo_vendita) || 0)
+        }));
+
+    renderizzaColonneSezione("grafico-sezione-prodotti", dati);
+}
+
 async function caricaDatiMagazzino() {
     const corpoTabella = document.querySelector("#corpo-magazzino");
     const contatore = document.querySelector("#conteggio-riordino");
@@ -337,6 +582,7 @@ async function caricaDatiMagazzino() {
         const prodotti = await risposta.json();
 
         popolaProdottiRettifica(prodotti);
+        renderizzaGraficoMagazzino(prodotti);
 
         const prodottiDaRiordinare = prodotti.filter((prodotto) => {
             return Number(prodotto.giacenza) <= Number(prodotto.soglia_riordino);
@@ -1122,6 +1368,7 @@ async function caricaGestioneProdotti() {
         }
 
         const prodotti = await risposta.json();
+        renderizzaGraficoCatalogo(prodotti);
         corpo.replaceChildren();
 
         if (prodotti.length === 0) {
@@ -1681,6 +1928,7 @@ async function caricaElencoAcquisti() {
         }
 
         const acquisti = await risposta.json();
+        renderizzaGraficoRegistro(acquisti, "acquisto");
         corpo.replaceChildren();
 
         if (acquisti.length === 0) {
@@ -1882,6 +2130,7 @@ async function caricaElencoVendite() {
             throw new Error(risultato.errore || `Richiesta fallita: HTTP ${risposta.status}`);
         }
 
+        renderizzaGraficoRegistro(risultato, "vendita");
         corpo.replaceChildren();
 
         if (risultato.length === 0) {
@@ -2275,7 +2524,7 @@ async function aggiornaDatiPaginaVisibile() {
         aggiornamenti.push(caricaRettificheMagazzino());
     }
 
-    if (document.querySelector("#conteggio-riordino")) {
+    if (document.querySelector("#conteggio-riordino") || document.querySelector("#conteggio-clienti")) {
         aggiornamenti.push(caricaRiepilogoPanoramica());
     }
 
@@ -2394,7 +2643,7 @@ if (document.querySelector("#corpo-rettifiche-magazzino")) {
     caricaRettificheMagazzino();
 }
 
-if (document.querySelector("#conteggio-riordino")) {
+if (document.querySelector("#conteggio-riordino") || document.querySelector("#conteggio-clienti")) {
     caricaRiepilogoPanoramica();
 }
 
