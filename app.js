@@ -625,6 +625,10 @@ async function caricaRiepilogoPanoramica() {
                     "scheda-statistica-riordino",
                     prodottiDaRiordinare > 0
                 );
+                schedaRiordino.classList.toggle(
+                    "dashboard-stat-warning",
+                    prodottiDaRiordinare > 0
+                );
             }
         }
 
@@ -655,11 +659,78 @@ async function caricaRiepilogoPanoramica() {
 
         if (schedaRiordino) {
             schedaRiordino.classList.remove("scheda-statistica-riordino");
+            schedaRiordino.classList.remove("dashboard-stat-warning");
         }
     }
 }
 
+function renderizzaGraficoMix(movimenti) {
+    const grafico = document.querySelector("#grafico-mix");
+    const vuoto = document.querySelector("#grafico-mix-vuoto");
+
+    if (!grafico) {
+        return;
+    }
+
+    grafico.replaceChildren();
+
+    const vendite = movimenti.filter((movimento) => movimento.operazione === "Vendita").length;
+    const acquisti = movimenti.filter((movimento) => movimento.operazione === "Acquisto").length;
+    const totale = vendite + acquisti;
+
+    if (totale === 0) {
+        if (vuoto) {
+            vuoto.hidden = false;
+        }
+        return;
+    }
+
+    if (vuoto) {
+        vuoto.hidden = true;
+    }
+
+    const contenuto = document.createElement("div");
+    contenuto.className = "grafico-mix-content";
+
+    const ciambella = document.createElement("div");
+    ciambella.className = "grafico-ciambella";
+    ciambella.style.setProperty("--vendite", `${(vendite / totale) * 100}%`);
+
+    const totaleEtichetta = document.createElement("span");
+    totaleEtichetta.className = "grafico-ciambella-label";
+    totaleEtichetta.textContent = totale;
+    ciambella.appendChild(totaleEtichetta);
+
+    const legenda = document.createElement("div");
+    legenda.className = "grafico-mix-legend";
+
+    for (const [etichetta, valore, colore] of [
+        ["Vendite", vendite, "var(--ciano)"],
+        ["Acquisti", acquisti, "var(--ambra)"]
+    ]) {
+        const riga = document.createElement("div");
+        riga.className = "grafico-mix-legend-row";
+
+        const indicatore = document.createElement("i");
+        indicatore.style.background = colore;
+
+        const nome = document.createElement("span");
+        nome.textContent = etichetta;
+
+        const conteggio = document.createElement("strong");
+        conteggio.textContent = valore;
+
+        riga.append(indicatore, nome, conteggio);
+        legenda.appendChild(riga);
+    }
+
+    contenuto.append(ciambella, legenda);
+    grafico.appendChild(contenuto);
+}
+
 function renderizzaGraficoMovimenti(movimenti) {
+    renderizzaGraficoMix(movimenti);
+
     const grafico = document.querySelector("#grafico-movimenti");
     const vuoto = document.querySelector("#grafico-movimenti-vuoto");
     const focusMovimenti = document.querySelector("#focus-movimenti");

@@ -9,117 +9,128 @@
 </head>
 
 <body>
-    <main class="contenitore">
+    <main class="contenitore dashboard-home">
+        <aside class="dashboard-sidebar">
+            <div class="dashboard-brand" aria-label="Kind SQL gestionale">
+                <span class="dashboard-brand-mark">K</span>
+                <span>
+                    <strong>KIND SQL</strong>
+                    <small>salone manager</small>
+                </span>
+            </div>
 
-    <header class="intestazione">
-        <div>
-        <p class="soprattitolo">GESTIONALE DEL SALONE</p>
-        <h1>Panoramica</h1>
+            <p class="dashboard-sidebar-label">Workspace</p>
+            <nav class="navigazione" aria-label="Navigazione principale">
+                <a href="/" class="pulsante-sezione attivo"><span class="nav-icon" aria-hidden="true">⌂</span><span>Panoramica</span></a>
+                <a href="/magazzino" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">▦</span><span>Magazzino</span></a>
+                <a href="/prodotti" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">□</span><span>Prodotti</span></a>
+                <a href="/servizi" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">✦</span><span>Servizi</span></a>
+                <a href="/fornitori" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">⌁</span><span>Fornitori</span></a>
+                <a href="/clienti" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">♙</span><span>Clienti</span></a>
+                <a href="/vendite" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">↗</span><span>Vendite</span></a>
+                <a href="/acquisti" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">↙</span><span>Acquisti</span></a>
+                <a href="/conteggio-iniziale" class="pulsante-sezione"><span class="nav-icon" aria-hidden="true">#</span><span>Conteggio iniziale</span></a>
+            </nav>
+
+            <div class="dashboard-sidebar-card">
+                <span class="dashboard-sidebar-card-label">Clienti registrati</span>
+                <strong id="conteggio-clienti">...</strong>
+                <span class="dashboard-sidebar-card-note">archivio attivo</span>
+            </div>
+        </aside>
+
+        <div class="dashboard-main">
+            <header class="intestazione dashboard-header">
+                <div>
+                    <p class="soprattitolo">GESTIONALE DEL SALONE <span class="dashboard-live-dot">LIVE</span></p>
+                    <h1>Panoramica</h1>
+                    <p class="dashboard-header-description">Il tuo salone, letto in un colpo d'occhio.</p>
+                </div>
+                <div class="dashboard-header-mark" aria-hidden="true">
+                    <span>01</span>
+                    <i></i>
+                    <span>HQ</span>
+                </div>
+            </header>
+
+            <section class="riepilogo" aria-label="Riepilogo mensile">
+                <article id="scheda-riordino" class="scheda-statistica dashboard-stat-warning">
+                    <div class="stat-card-top"><h2>Prodotti da riordinare</h2><span class="stat-card-symbol">!</span></div>
+                    <p id="conteggio-riordino">...</p>
+                    <span class="stat-card-caption">scorte sotto soglia</span>
+                </article>
+
+                <article class="scheda-statistica scheda-statistica-acquisti">
+                    <div class="stat-card-top"><h2>Acquisti del mese</h2><span class="stat-card-symbol">↙</span></div>
+                    <p id="totale-acquisti-mese">...</p>
+                    <span class="stat-card-caption">uscite registrate</span>
+                </article>
+
+                <article class="scheda-statistica scheda-statistica-vendite">
+                    <div class="stat-card-top"><h2>Vendite del mese</h2><span class="stat-card-symbol">↗</span></div>
+                    <p id="totale-vendite-mese">...</p>
+                    <span class="stat-card-caption">entrate registrate</span>
+                </article>
+            </section>
+
+            <section class="dashboard-insight-grid" aria-label="Indicatori operativi">
+                <article class="dashboard-panel dashboard-chart-panel">
+                    <div class="dashboard-panel-heading">
+                        <div>
+                            <p class="soprattitolo">GRAFICO 01</p>
+                            <h2>Movimenti recenti</h2>
+                        </div>
+                        <span class="dashboard-panel-badge">ULTIMI 7 GIORNI</span>
+                    </div>
+                    <p class="dashboard-panel-description">Vendite e acquisti presenti negli ultimi movimenti caricati.</p>
+                    <div id="grafico-movimenti" class="grafico-movimenti" role="img" aria-label="Grafico dei movimenti recenti"></div>
+                    <p id="grafico-movimenti-vuoto" class="grafico-vuoto" hidden>Il grafico apparirà quando saranno disponibili movimenti.</p>
+                </article>
+
+                <article class="dashboard-panel dashboard-mix-panel">
+                    <div class="dashboard-panel-heading">
+                        <div>
+                            <p class="soprattitolo">GRAFICO 02</p>
+                            <h2>Mix operazioni</h2>
+                        </div>
+                        <span class="dashboard-panel-status">LIVE</span>
+                    </div>
+                    <div id="grafico-mix" class="grafico-mix" role="img" aria-label="Distribuzione tra vendite e acquisti"></div>
+                    <p id="grafico-mix-vuoto" class="grafico-vuoto" hidden>Nessun movimento da analizzare.</p>
+                    <div class="dashboard-focus-strip">
+                        <span class="dashboard-focus-icon" aria-hidden="true">!</span>
+                        <span><b id="focus-riordino">—</b> prodotti richiedono attenzione</span>
+                        <a href="/magazzino">Apri</a>
+                    </div>
+                </article>
+            </section>
+
+            <section class="movimenti">
+                <div class="section-heading-row">
+                    <div>
+                        <p class="soprattitolo">REGISTRO ATTIVO</p>
+                        <h2>Ultimi movimenti</h2>
+                    </div>
+                    <span class="movement-count"><b id="focus-movimenti">—</b> registrazioni</span>
+                </div>
+
+                <div class="tabella-scroll">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th scope="col">Data</th>
+                            <th scope="col">Operazione</th>
+                            <th scope="col">Cliente / Fornitore</th>
+                            <th scope="col">Importo</th>
+                        </tr>
+                        </thead>
+                        <tbody id="corpo-movimenti">
+                        <tr><td colspan="4" class="tabella-vuota">Caricamento movimenti…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    </header>
-
-    <section class="riepilogo">
-        <article id="scheda-riordino" class="scheda-statistica">
-        <h2>Prodotti da riordinare</h2>
-        <p id="conteggio-riordino">...</p>
-        </article>
-
-        <article class="scheda-statistica scheda-statistica-vendite">
-        <h2>Vendite del mese</h2>
-        <p id="totale-vendite-mese">...</p>
-        </article>
-
-        <article class="scheda-statistica scheda-statistica-acquisti">
-        <h2>Acquisti del mese</h2>
-        <p id="totale-acquisti-mese">...</p>
-        </article>
-
-        <article class="scheda-statistica scheda-statistica-clienti">
-        <h2>Clienti registrati</h2>
-        <p id="conteggio-clienti">...</p>
-        </article>
-    </section>
-
-    <nav class="navigazione" aria-label="Navigazione principale">
-        <a href="/" class="pulsante-sezione attivo">Panoramica</a>
-        <a href="/magazzino" class="pulsante-sezione">Magazzino</a>
-        <a href="/conteggio-iniziale" class="pulsante-sezione">Conteggio iniziale</a>
-        <a href="/acquisti" class="pulsante-sezione">Acquisti</a>
-        <a href="/vendite" class="pulsante-sezione">Vendite</a>
-        <a href="/clienti" class="pulsante-sezione">Clienti</a>
-        <a href="/prodotti" class="pulsante-sezione">Prodotti</a>
-        <a href="/servizi" class="pulsante-sezione">Servizi</a>
-        <a href="/fornitori" class="pulsante-sezione">Fornitori</a>
-    </nav>
-
-    <section class="dashboard-insight-grid" aria-label="Indicatori operativi">
-        <article class="dashboard-panel dashboard-chart-panel">
-            <div class="dashboard-panel-heading">
-                <div>
-                    <p class="soprattitolo">ATTIVITÀ RECENTE</p>
-                    <h2>Movimenti per giorno</h2>
-                </div>
-                <span class="dashboard-panel-badge">DATI API</span>
-            </div>
-            <p class="dashboard-panel-description">
-                Vendite e acquisti presenti negli ultimi movimenti caricati.
-            </p>
-            <div id="grafico-movimenti" class="grafico-movimenti" role="img" aria-label="Grafico dei movimenti recenti"></div>
-            <p id="grafico-movimenti-vuoto" class="grafico-vuoto" hidden>
-                Il grafico apparirà quando saranno disponibili movimenti.
-            </p>
-        </article>
-
-        <article class="dashboard-panel dashboard-focus-panel">
-            <div class="dashboard-panel-heading">
-                <div>
-                    <p class="soprattitolo">FOCUS OPERATIVO</p>
-                    <h2>Da tenere sotto controllo</h2>
-                </div>
-                <span class="dashboard-panel-status">LIVE</span>
-            </div>
-            <div class="dashboard-focus-item dashboard-focus-warning">
-                <span class="dashboard-focus-icon" aria-hidden="true">!</span>
-                <div>
-                    <strong>Scorte da riordinare</strong>
-                    <span><b id="focus-riordino">—</b> prodotti richiedono attenzione</span>
-                </div>
-                <a href="/magazzino">Apri</a>
-            </div>
-            <div class="dashboard-focus-item dashboard-focus-neutral">
-                <span class="dashboard-focus-icon" aria-hidden="true">↗</span>
-                <div>
-                    <strong>Movimenti caricati</strong>
-                    <span><b id="focus-movimenti">—</b> registrazioni recenti</span>
-                </div>
-                <span class="dashboard-focus-arrow" aria-hidden="true">›</span>
-            </div>
-        </article>
-    </section>
-
-    <section class="movimenti">
-        <h2>Ultimi movimenti</h2>
-
-        <div class="tabella-scroll">
-        <table>
-            <thead>
-            <tr>
-                <th scope="col">Data</th>
-                <th scope="col">Operazione</th>
-                <th scope="col">Cliente / Fornitore</th>
-                <th scope="col">Importo</th>
-            </tr>
-            </thead>
-
-            <tbody id="corpo-movimenti">
-            <tr>
-                <td colspan="4" class="tabella-vuota">Caricamento movimenti…</td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
-    </section>
-
     </main>
 <script src="/app.js" defer></script>
 </body>
